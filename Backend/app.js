@@ -4,6 +4,8 @@ const path = require('path');
 const authRoute = require('./Routes/authRoute');
 const saucesRoute = require('./Routes/saucesRoute')
 
+// Connexion à la DataBase MongoDB
+
 mongoose.connect('mongodb+srv://TheoLarrue:Kor2302*@cluster0.uvmy3.mongodb.net/?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -11,7 +13,11 @@ mongoose.connect('mongodb+srv://TheoLarrue:Kor2302*@cluster0.uvmy3.mongodb.net/?
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+// Lancement d'Express
+
 const app = express();
+
+// Config Cors / Headers
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,8 +26,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// Middleware parse request Json
+
 app.use(express.json());
 
+// Routes
 
 app.use('/api/auth', authRoute);
 app.use('/api/sauces', saucesRoute);

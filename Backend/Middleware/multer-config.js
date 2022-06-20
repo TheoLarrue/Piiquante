@@ -1,3 +1,5 @@
+// Configutation de Multer
+
 const multer = require('multer');
 
 const MIME_TYPES = {

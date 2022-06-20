@@ -1,6 +1,7 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
+// Récupère toutes les sauces
 
 exports.getAllSauce = (req, res, next) => {
     Sauce.find()
@@ -8,11 +9,15 @@ exports.getAllSauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 }
 
+// Récupère une sauce via l'Id
+
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
         .then(thing => res.status(200).json(thing))
         .catch(error => res.status(404).json({ error }));
 };
+
+// Création d'une sauce
 
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
@@ -20,8 +25,8 @@ exports.createSauce = (req, res, next) => {
     const sauce = new Sauce({
         ...sauceObject,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-        usersLiked: [''],
-        usersDislided: [''],
+        usersLiked: [],
+        usersDislided: [],
         likes: 0,
         dislike: 0,
     });
@@ -29,6 +34,8 @@ exports.createSauce = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
         .catch(error => res.status(400).json({ error }));
 };
+
+// Modifie une sauce
 
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
@@ -39,6 +46,8 @@ exports.modifySauce = (req, res, next) => {
         .then(() => res.status(200).json({ message: 'Objet modifié !' }))
         .catch(error => res.status(400).json({ error }));
 };
+
+// Supprime une sauce 
 
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id })
@@ -64,6 +73,8 @@ exports.deleteSauce = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+
+// Like / Dislike / Neutre
 
 exports.likeSauce = (req, res, next) => {
 
