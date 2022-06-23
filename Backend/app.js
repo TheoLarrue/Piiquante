@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const helmet = require('helmet');
 const authRoute = require('./Routes/authRoute');
 const saucesRoute = require('./Routes/saucesRoute')
 
@@ -18,6 +19,8 @@ mongoose.connect('mongodb+srv://TheoLarrue:Kor2302*@cluster0.uvmy3.mongodb.net/?
 const app = express();
 
 // Config Cors / Headers
+
+app.use(helmet());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

@@ -55,7 +55,7 @@ exports.deleteSauce = (req, res, next) => {
 
             if (!sauce) {
                 res.status(404).json({
-                    error: new Error('No such Thing!')
+                    error: new Error('No such Sauce!')
                 });
             }
             if (sauce.userId !== req.auth.userId) {
