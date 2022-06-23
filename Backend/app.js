@@ -21,7 +21,11 @@ const app = express();
 
 // Config Cors / Headers
 
-app.use(helmet());
+app.use(
+    helmet({
+        crossOriginResourcePolicy: false,
+    })
+);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

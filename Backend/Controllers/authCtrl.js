@@ -1,7 +1,17 @@
 const User = require('../models/User');
+const maskData = require('maskdata');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
+
+// Configuration MaskData
+
+const emailMask2Options = {
+    maskWith: "*",
+    unmaskedStartCharactersBeforeAt: 5,
+    unmaskedEndCharactersAfterAt: 3,
+    maskAtTheRate: false
+};
 
 
 // Fonction SignUp
@@ -10,6 +20,7 @@ exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User({
+                // email: maskData.maskEmail2(req.body.email, emailMask2options),
                 email: req.body.email,
                 password: hash
             });
