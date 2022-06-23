@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -7,7 +8,7 @@ const saucesRoute = require('./Routes/saucesRoute')
 
 // Connexion à la DataBase MongoDB
 
-mongoose.connect('mongodb+srv://TheoLarrue:Kor2302*@cluster0.uvmy3.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://${process.env.DB_User}:${process.env.DB_Password}@${process.env.DB_Url}?retryWrites=true&w=majority`, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
