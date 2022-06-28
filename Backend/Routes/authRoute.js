@@ -7,7 +7,7 @@ const emailValidator = require('../Middleware/emailValidator')
 
 // Routes
 
-router.post('/signup', emailValidator, passwordValidator, authCtrl.signup);
+router.post('/signup', limiter, emailValidator, passwordValidator, authCtrl.signup);
 router.post('/login', limiter, authCtrl.login);
 
 module.exports = router;

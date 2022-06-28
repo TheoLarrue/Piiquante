@@ -8,8 +8,8 @@ require('dotenv').config();
 
 const emailMask2Options = {
     maskWith: "*",
-    unmaskedStartCharactersBeforeAt: 5,
-    unmaskedEndCharactersAfterAt: 3,
+    unmaskedStartCharactersBeforeAt: 3,
+    unmaskedEndCharactersAfterAt: 2,
     maskAtTheRate: false
 };
 
@@ -34,6 +34,7 @@ exports.signup = (req, res, next) => {
 // Fonction LogIn
 
 exports.login = (req, res, next) => {
+    // User.findOne({ email: maskData.maskEmail2(req.body.email, maskData) })
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
